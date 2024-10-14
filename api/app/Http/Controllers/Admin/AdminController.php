@@ -16,4 +16,12 @@ class AdminController extends Controller
             'items' => Admin::query()->get()
         ]);
     }
+
+    public function show(Admin $admin): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'item' => $admin
+        ]);
+    }
 }

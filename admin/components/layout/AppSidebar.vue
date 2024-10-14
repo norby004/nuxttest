@@ -23,7 +23,8 @@ const items = ref([
         items: [
             {
                 label: 'Új létrehozása',
-                icon: 'pi pi-plus-circle'
+                icon: 'pi pi-plus-circle',
+                command: () => navigateTo('/admin'),
             },
             {
                 label: 'Összes megtekintése',

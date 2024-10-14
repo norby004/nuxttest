@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function()
     Route::controller(AdminController::class)->prefix('admins')->group(function()
     {
         Route::get('', 'index');
+        Route::get('{admin}', 'show');
     });
     
 });

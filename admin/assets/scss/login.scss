@@ -1,0 +1,16 @@
+.login-layout, #__nuxt {
+    height: 100%;
+
+    .login-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 0 15px;
+    }
+
+    .login-box {
+        width: 600px;
+        max-width: 100%;
+    }
+}

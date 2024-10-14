@@ -1,0 +1,1 @@
+export const isEdit = computed(() => useRoute().params.hasOwnProperty('id'));

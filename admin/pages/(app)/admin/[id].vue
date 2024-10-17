@@ -9,9 +9,11 @@ const form = reactive({
 });
 
 if(isEdit()) {
-    const { data } = await useAsyncData(() => fetchAPI(`/admins/${route.params.id}`));
-    if(data.value.success === true) {
+    const { data } = await useAsyncData(() => $admin.show(route.params.id as string));
+    if(data.value?.success === true) {
         form.data = data.value.data;
+    } else {
+        navigateTo('/admin');
     }
 }
 

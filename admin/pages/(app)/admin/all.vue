@@ -5,12 +5,12 @@ const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
 
-const { data: admins, status } = await useAsyncData(() => fetchAPI('admins'));
+const { data: admins } = await useAsyncData(() => $admin.all());
 
 </script>
 <template>
     <Panel header="Adminisztrátorok">
-        <DataTable :value="admins.data" stripedRows paginator :rows="10" v-model:filters="filters" :globalFilterFields="['name','email']">
+        <DataTable :value="admins?.data" stripedRows paginator :rows="10" v-model:filters="filters" :globalFilterFields="['name','email']">
             <template #header>
                 <div class="flex justify-content-end">
                     <IconField>

@@ -1,5 +1,5 @@
 export interface IResponse<DataType> {
-    data: DataType;
-    success: boolean;
+    data?: DataType;
+    success?: boolean;
     errors?: object;
 }

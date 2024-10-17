@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import { FilterMatchMode } from '@primevue/core/api';
 
-const admins = ref();
-
 const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
 
-const { data } = await useAPI('admins');
-
-if(data.value.success) {
-    admins.value = data.value.items;
-}
+const { data: admins, status } = await useAsyncData(() => fetchAPI('admins'));
 
 </script>
 <template>
     <Panel header="Adminisztrátorok">
-        <DataTable :value="admins" stripedRows paginator :rows="10" v-model:filters="filters" :globalFilterFields="['name','email']">
+        <DataTable :value="admins.data" stripedRows paginator :rows="10" v-model:filters="filters" :globalFilterFields="['name','email']">
             <template #header>
                 <div class="flex justify-content-end">
                     <IconField>

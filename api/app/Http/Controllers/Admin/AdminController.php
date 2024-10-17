@@ -12,16 +12,16 @@ class AdminController extends Controller
     public function index(): JsonResponse
     {
         return response()->json([
-            'success' => true,
-            'items' => Admin::query()->get()
+            'success'   => true,
+            'data'      => Admin::query()->get()
         ]);
     }
 
     public function show(Admin $admin): JsonResponse
     {
         return response()->json([
-            'success' => true,
-            'item' => $admin
+            'success'   => true,
+            'data'      => $admin
         ]);
     }
 }

@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 		'@primevue/nuxt-module'
 	],
 	imports: {
-		dirs: ['api', 'stores']
+		dirs: ['api', 'stores', 'interfaces']
 	},
 	primevue: {
 		options: {

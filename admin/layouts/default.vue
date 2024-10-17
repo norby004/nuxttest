@@ -6,7 +6,6 @@ useHead({
         class: 'app-layout'
     }
 });
-
 </script>
 <template>
 

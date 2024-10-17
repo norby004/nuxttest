@@ -9,13 +9,9 @@ const form = reactive({
 });
 
 if(isEdit()) {
-    const { data } = await useAPI(`/admins/${route.params.id}`);
+    const { data } = await useAsyncData(() => fetchAPI(`/admins/${route.params.id}`));
     if(data.value.success === true) {
-        form.data = {
-            ...data.value.item,
-            formatCreatedAt: new Date(data.value.item.created_at).toLocaleString(),
-            formatUpdatedAt: new Date(data.value.item.updated_at).toLocaleString(),
-        };
+        form.data = data.value.data;
     }
 }
 
@@ -47,12 +43,12 @@ if(isEdit()) {
 
             <template v-if="isEdit()">
                 <IftaLabel class="mt-3">
-                    <InputText id="created-at" v-model="form.data.formatCreatedAt" class="w-full" disabled />
+                    <InputText id="created-at" :value="new Date(form.data.created_at).toLocaleString()" class="w-full" disabled />
                     <label for="created-at">Létrehozva</label>
                 </IftaLabel>
 
                 <IftaLabel class="mt-3">
-                    <InputText id="updated-at" v-model="form.data.formatUpdatedAt" class="w-full" disabled />
+                    <InputText id="updated-at" :value="new Date(form.data.created_at).toLocaleString()" class="w-full" disabled />
                     <label for="updated-at">Módosítva</label>
                 </IftaLabel>
             </template>

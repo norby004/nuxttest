@@ -1,3 +1,8 @@
+<script setup lang="ts">
+useHead({
+	title: 'Kezelőfelület'
+});
+</script>
 <template>
 	<NuxtLoadingIndicator :height="5" />
 	<NuxtLayout>

@@ -1,16 +1,13 @@
-interface LoginResponse {
-    success: boolean;
-    token: string;
-    errors?: object;
-}
-
 export const $auth = 
 {
-    async login(data: FormData): Promise<LoginResponse> {
-        return await usePOST('auth/login', data);
+    async login(data: FormData): Promise<IResponse<ILoginResponse>> {
+        return await fetchAPI('auth/login',{
+            method: 'POST',
+            body: data
+        });
     },
     
-    async me() {
-        return await useGET('auth/me');
+    async me(): Promise<IResponse<IMeResponse>> {
+        return await fetchAPI('auth/me');
     }
 };

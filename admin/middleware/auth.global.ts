@@ -4,8 +4,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         const authStore = useAuthStore();
         if(!authStore.value) {
             const response = await $auth.me();
-            if (response.success && response.user) {
-                authStore.value = response.user;
+            if (response.success && response.data) {
+                authStore.value = response.data;
             }
         }
     }

@@ -18,7 +18,7 @@ const handleSubmit = async (event: Event) => {
     const response = await $auth.login(new FormData(event.target as HTMLFormElement)).finally(() => form.loading = false);
     form.error = response.errors || {};
     if(response.success) {
-        token.value = response.token;
+        token.value = response.data.token;
         navigateTo('/dashboard');
     }
 }

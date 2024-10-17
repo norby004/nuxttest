@@ -26,15 +26,17 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'token' => $user->createToken($user->email)->plainTextToken,
+            'data' => [
+                'token' => $user->createToken($user->email)->plainTextToken,
+            ]
         ]);
     }
 
     public function me(): JsonResponse
     {
         return response()->json([
-            'success' => true,
-            'user' => auth()->user()
+            'success'   => true,
+            'data'      => auth()->user()
         ]);
     }
 }

@@ -18,6 +18,8 @@ Route::middleware('auth:sanctum')->group(function()
     {
         Route::get('', 'index');
         Route::get('{admin}', 'show');
+        Route::post('store', 'store');
+        Route::put('{admin}', 'update');
     });
     
 });

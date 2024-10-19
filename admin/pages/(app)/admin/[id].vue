@@ -5,22 +5,29 @@ definePageMeta({
 
 const route = useRoute();
 const form = reactive({
-    data: {} as any
+    data: {} as IAdminForm
 });
 
 if(isEdit()) {
     const { data } = await useAsyncData(() => $admin.show(route.params.id as string));
-    if(data.value?.success === true) {
+    if(data.value?.success === true && data.value?.data) {
         form.data = data.value.data;
     } else {
         navigateTo('/admin');
     }
 }
 
+const submit = async() => {
+    const response = isEdit() ? await $admin.update(route.params.id as string, form.data) : await $admin.store(form.data);
+    if(response.success === true) {
+        delete form.data.password; delete form.data.password_confirmation;
+    }
+}
+
 </script>
 <template>
     <Panel :header="isEdit() ? 'Adminisztrátor > Módosítás' : 'Adminisztrátor > Új'">
-        <form>
+        <form @submit.prevent="submit">
             <IftaLabel>
                 <InputText id="name" v-model="form.data.name" class="w-full" />
                 <label for="name">Név</label>
@@ -33,12 +40,12 @@ if(isEdit()) {
 
             <div class="flex gap-3 mt-3">
                 <IftaLabel class="flex-1">
-                    <InputText id="password" v-model="form.data.password" class="w-full" />
+                    <Password id="password" v-model="form.data.password" class="w-full" inputClass="w-full" />
                     <label for="password">Jelszó</label>
                 </IftaLabel>
 
                 <IftaLabel class="flex-1">
-                    <InputText id="password-confirmation" v-model="form.data.password_confirmation" class="w-full" />
+                    <Password id="password-confirmation" v-model="form.data.password_confirmation" class="w-full" inputClass="w-full" />
                     <label for="password-confirmation">Jelszó mégegyszer</label>
                 </IftaLabel>
             </div>
@@ -50,7 +57,7 @@ if(isEdit()) {
                 </IftaLabel>
 
                 <IftaLabel class="mt-3">
-                    <InputText id="updated-at" :value="new Date(form.data.created_at).toLocaleString()" class="w-full" disabled />
+                    <InputText id="updated-at" :value="new Date(form.data.updated_at).toLocaleString()" class="w-full" disabled />
                     <label for="updated-at">Módosítva</label>
                 </IftaLabel>
             </template>
